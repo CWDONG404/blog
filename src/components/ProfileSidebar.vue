@@ -18,13 +18,20 @@ const expanded = ref(false)
         <a class="profile-email" href="mailto:498567496@qq.com">498567496@qq.com</a>
       </div>
 
-      <button class="info-more-btn" type="button" @click="expanded = !expanded">
+      <button
+        class="info-more-btn"
+        type="button"
+        :aria-label="expanded ? '收起个人资料' : '展开个人资料'"
+        :aria-expanded="expanded"
+        aria-controls="profile-details"
+        @click="expanded = !expanded"
+      >
         <span>{{ expanded ? '收起资料' : '展开资料' }}</span>
         <ion-icon :name="expanded ? 'chevron-up' : 'chevron-down'"></ion-icon>
       </button>
     </div>
 
-    <div class="sidebar-info-more">
+    <div id="profile-details" class="sidebar-info-more">
       <div class="separator"></div>
 
       <ul class="contacts-list">
