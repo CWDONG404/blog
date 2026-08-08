@@ -3,64 +3,74 @@ import { ref } from 'vue'
 import avatarUrl from '../assets/avatar-luffy-pixel.webp'
 
 const expanded = ref(false)
+
+const contacts = [
+  { icon: 'mail-outline', label: '邮箱', value: '498567496@qq.com', href: 'mailto:498567496@qq.com', isAddress: false },
+  { icon: 'business-outline', label: '当前任职', value: '360安全能力中心 · 冰刃研究院', href: '', isAddress: false },
+  { icon: 'location-outline', label: '所在地', value: '北京，中国', href: '', isAddress: true },
+  { icon: 'sparkles-outline', label: '发展方向', value: 'AI 应用开发', href: '', isAddress: false },
+]
 </script>
 
 <template>
-  <aside class="sidebar" :class="{ active: expanded }" data-sidebar>
-    <div class="sidebar-info">
-      <figure class="avatar-box">
-        <img :src="avatarUrl" alt="路飞主题像素头像" width="80" height="80" />
+  <aside class="surface-card panel-sizing profile-sidebar mb-4 sm:mb-8" :class="{ expanded }">
+    <div class="relative flex items-center gap-4 sm:gap-6 xl:flex-col">
+      <figure
+        class="shrink-0 overflow-hidden rounded-[20px] bg-linear-to-br from-[hsl(240,1%,25%)] to-[hsl(0,0%,19%)] sm:rounded-[30px]"
+      >
+        <img
+          :src="avatarUrl"
+          alt="路飞主题像素头像"
+          width="80"
+          height="80"
+          class="block h-20 w-20 object-cover [image-rendering:pixelated] sm:h-[120px] sm:w-[120px] xl:h-[150px] xl:w-[150px]"
+        />
       </figure>
 
-      <div class="info-content">
-        <h1 class="name" title="CWD">CWD</h1>
-        <p class="title">高级测试开发工程师</p>
+      <div class="min-w-0">
+        <h1
+          class="mb-2.5 text-[17px] font-medium tracking-[-0.25px] text-paper sm:mb-4 sm:text-[26px] xl:text-center xl:whitespace-nowrap"
+          title="CWD"
+        >
+          CWD
+        </h1>
+        <p class="w-max rounded-lg bg-onyx px-3 py-[3px] text-xs font-light text-white sm:px-2.5 sm:py-[5px] xl:mx-auto">
+          高级测试开发工程师
+        </p>
         <a class="profile-email" href="mailto:498567496@qq.com">498567496@qq.com</a>
       </div>
 
       <button
-        class="info-more-btn"
         type="button"
+        class="corner-btn inline-flex items-center justify-center gap-1 xl:hidden"
         :aria-label="expanded ? '收起个人资料' : '展开个人资料'"
         :aria-expanded="expanded"
         aria-controls="profile-details"
         @click="expanded = !expanded"
       >
-        <span>{{ expanded ? '收起资料' : '展开资料' }}</span>
-        <ion-icon :name="expanded ? 'chevron-up' : 'chevron-down'"></ion-icon>
+        <span class="hidden text-xs sm:block">{{ expanded ? '收起资料' : '展开资料' }}</span>
+        <ion-icon class="sm:hidden" :name="expanded ? 'chevron-up' : 'chevron-down'"></ion-icon>
       </button>
     </div>
 
     <div id="profile-details" class="sidebar-info-more">
-      <div class="separator"></div>
+      <div class="my-4 h-px w-full bg-jet sm:my-8"></div>
 
-      <ul class="contacts-list">
-        <li class="contact-item">
-          <div class="icon-box"><ion-icon name="mail-outline"></ion-icon></div>
-          <div class="contact-info">
-            <p class="contact-title">邮箱</p>
-            <a href="mailto:498567496@qq.com" class="contact-link">498567496@qq.com</a>
-          </div>
-        </li>
-        <li class="contact-item">
-          <div class="icon-box"><ion-icon name="business-outline"></ion-icon></div>
-          <div class="contact-info">
-            <p class="contact-title">当前任职</p>
-            <p class="contact-link">360安全能力中心 · 冰刃研究院</p>
-          </div>
-        </li>
-        <li class="contact-item">
-          <div class="icon-box"><ion-icon name="location-outline"></ion-icon></div>
-          <div class="contact-info">
-            <p class="contact-title">所在地</p>
-            <address>北京，中国</address>
-          </div>
-        </li>
-        <li class="contact-item">
-          <div class="icon-box"><ion-icon name="sparkles-outline"></ion-icon></div>
-          <div class="contact-info">
-            <p class="contact-title">发展方向</p>
-            <p class="contact-link">AI 应用开发</p>
+      <ul class="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 md:gap-x-4 md:gap-y-8 xl:grid-cols-1">
+        <li v-for="contact in contacts" :key="contact.label" class="flex min-w-full items-center gap-4">
+          <div class="icon-box shrink-0"><ion-icon :name="contact.icon"></ion-icon></div>
+          <div class="w-[calc(100%-46px)] max-w-[calc(100%-46px)] sm:w-[calc(100%-64px)] sm:max-w-[calc(100%-64px)]">
+            <p class="mb-0.5 text-xs uppercase text-mist-70">{{ contact.label }}</p>
+            <a
+              v-if="contact.href"
+              :href="contact.href"
+              class="block break-all text-[13px] text-paper transition-colors duration-[250ms] hover:text-gold sm:text-[15px] xl:text-sm xl:font-light"
+              >{{ contact.value }}</a
+            >
+            <address v-else-if="contact.isAddress" class="text-[13px] break-words text-paper not-italic sm:text-[15px] xl:text-sm xl:font-light">{{
+              contact.value
+            }}</address>
+            <p v-else class="text-[13px] break-words text-paper sm:text-[15px] xl:text-sm xl:font-light">{{ contact.value }}</p>
           </div>
         </li>
       </ul>

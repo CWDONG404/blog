@@ -9,10 +9,14 @@ const links = [
 </script>
 
 <template>
-  <nav class="navbar" aria-label="主导航">
-    <ul class="navbar-list">
-      <li v-for="link in links" :key="link.to" class="navbar-item">
-        <RouterLink class="navbar-link" :to="link.to" active-class="active" :exact-active-class="link.to === '/' ? 'active' : undefined">
+  <nav class="navbar-shell" aria-label="主导航">
+    <ul class="flex flex-nowrap items-center justify-center px-2.5 sm:gap-5 lg:gap-8">
+      <li v-for="link in links" :key="link.to">
+        <RouterLink
+          :to="link.to"
+          active-class="text-gold!"
+          class="block px-[7px] py-5 text-xs whitespace-nowrap text-mist transition-colors duration-[250ms] hover:text-mist-70 sm:text-sm md:text-[15px] lg:font-medium"
+        >
           {{ link.label }}
         </RouterLink>
       </li>

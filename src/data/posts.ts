@@ -5,7 +5,7 @@ export interface BlogPost {
   date: string
   category: string
   cover: 'ai' | 'rag' | 'testing'
-  fileName: string
+  order: number
   content: string
 }
 
@@ -15,40 +15,41 @@ const markdownModules = import.meta.glob('../content/blog/*.md', {
   eager: true,
 }) as Record<string, string>
 
-const metadata: Array<Omit<BlogPost, 'content'>> = [
-  {
-    slug: 'test-development-to-ai-application',
-    title: '从测试开发到 AI 应用开发：一条工程化成长路径',
-    summary: '如何把测试开发中的自动化、问题定位和质量思维，迁移为 AI 应用开发的工程优势。',
-    date: '2026-08-06',
-    category: '职业成长',
-    cover: 'ai',
-    fileName: 'test-development-to-ai-application.md',
-  },
-  {
-    slug: 'rag-web-service-on-limited-resources',
-    title: '在有限资源下搭建 RAG Web 服务：从文档解析到检索问答',
-    summary: '从最小闭环出发，拆解文档处理、向量检索、答案生成、评估和部署的关键决策。',
-    date: '2026-08-06',
-    category: 'AI 工程',
-    cover: 'rag',
-    fileName: 'rag-web-service-on-limited-resources.md',
-  },
-  {
-    slug: 'driver-compatibility-testing-workflow',
-    title: '驱动与安全产品兼容性测试：如何构建可复现的问题定位链路',
-    summary: '从环境基线、证据采集到最小复现与回归矩阵，建立稳定、可沟通的兼容性测试方法。',
-    date: '2026-08-06',
-    category: '测试工程',
-    cover: 'testing',
-    fileName: 'driver-compatibility-testing-workflow.md',
-  },
-]
+/**
+ * 轻量 frontmatter 解析：md 文件是唯一信息源。
+ * 支持 `key: value` 行（值可包含中文与全角冒号），正文为 --- 之后的内容。
+ */
+function parsePost(filePath: string, raw: string): BlogPost {
+  const meta: Record<string, string> = {}
+  let body = raw
 
-export const posts: BlogPost[] = metadata.map((post) => ({
-  ...post,
-  content: markdownModules[`../content/blog/${post.fileName}`] ?? '',
-}))
+  const frontmatter = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/)
+  if (frontmatter) {
+    body = frontmatter[2]
+    for (const line of frontmatter[1].split(/\r?\n/)) {
+      const pair = line.match(/^([A-Za-z_]+):\s*(.+)$/)
+      if (pair) meta[pair[1]] = pair[2].trim()
+    }
+  }
+
+  const fileSlug = filePath.split('/').pop()?.replace(/\.md$/, '') ?? ''
+
+  return {
+    slug: meta.slug || fileSlug,
+    title: meta.title ?? '未命名文章',
+    summary: meta.summary ?? '',
+    date: meta.date ?? '1970-01-01',
+    category: meta.category ?? '未分类',
+    cover: (meta.cover as BlogPost['cover']) ?? 'ai',
+    order: Number.parseInt(meta.order ?? '99', 10),
+    content: body.trim(),
+  }
+}
+
+/** 按日期倒序；日期相同时按 frontmatter 中的 order 升序 */
+export const posts: BlogPost[] = Object.entries(markdownModules)
+  .map(([path, raw]) => parsePost(path, raw))
+  .sort((a, b) => (a.date === b.date ? a.order - b.order : b.date.localeCompare(a.date)))
 
 export function findPost(slug: string): BlogPost | undefined {
   return posts.find((post) => post.slug === slug)

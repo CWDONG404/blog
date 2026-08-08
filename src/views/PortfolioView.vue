@@ -21,23 +21,37 @@ const projects = [
 </script>
 
 <template>
-  <article class="portfolio active" data-page="portfolio">
+  <article class="surface-card panel-sizing animate-fade-in">
     <header>
-      <h2 class="h2 article-title">项目作品</h2>
+      <h2 class="article-title mb-8 text-2xl text-paper sm:text-[32px]">项目作品</h2>
     </header>
 
-    <section class="projects">
-      <p class="section-lead">这里记录我已经上线、可以直接体验的真实项目。点击卡片将在新标签页打开。</p>
-      <ul class="project-list featured-project-list">
-        <li v-for="project in projects" :key="project.url" class="project-item active">
-          <a :href="project.url" target="_blank" rel="noopener noreferrer">
-            <figure class="project-img">
-              <div class="project-item-icon-box"><ion-icon name="open-outline"></ion-icon></div>
-              <img :src="project.cover" :alt="`${project.title} 首页截图`" width="1440" height="900" loading="lazy" />
+    <section>
+      <p class="mx-[5px] -mt-[5px] mb-6 text-sm leading-[1.7] text-mist sm:text-[15px]">
+        这里记录我已经上线、可以直接体验的真实项目。点击卡片将在新标签页打开。
+      </p>
+      <ul class="grid grid-cols-1 gap-8 md:grid-cols-2">
+        <li v-for="project in projects" :key="project.url" class="animate-scale-up">
+          <a :href="project.url" target="_blank" rel="noopener noreferrer" class="group block w-full">
+            <figure class="relative mb-4 aspect-[8/5] w-full overflow-hidden rounded-2xl bg-eerie-1">
+              <div class="absolute inset-0 z-[1] bg-black/0 transition-colors duration-[250ms] group-hover:bg-black/50"></div>
+              <div
+                class="absolute top-1/2 left-1/2 z-[2] flex -translate-x-1/2 -translate-y-1/2 scale-75 items-center justify-center rounded-xl bg-jet p-[18px] text-xl text-gold opacity-0 transition-all duration-[250ms] group-hover:scale-100 group-hover:opacity-100"
+              >
+                <ion-icon name="open-outline" class="block [--ionicon-stroke-width:50px]"></ion-icon>
+              </div>
+              <img
+                :src="project.cover"
+                :alt="`${project.title} 首页截图`"
+                width="1440"
+                height="900"
+                loading="lazy"
+                class="h-full w-full object-contain"
+              />
             </figure>
-            <h3 class="project-title">{{ project.title }}</h3>
-            <p class="project-category">{{ project.category }}</p>
-            <p class="project-description">{{ project.description }}</p>
+            <h3 class="ml-2.5 text-[15px] leading-[1.3] font-normal text-paper">{{ project.title }}</h3>
+            <p class="ml-2.5 text-sm font-light text-mist-70">{{ project.category }}</p>
+            <p class="mx-2.5 mt-2 text-[13px] leading-[1.6] font-light text-mist">{{ project.description }}</p>
           </a>
         </li>
       </ul>
