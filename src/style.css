@@ -57,6 +57,13 @@
     overflow-x: clip;
   }
 
+  /* 包含首个页面元素的顶部外边距，避免 margin collapse 让 body 背景从 60px 后才开始绘制。 */
+  #app {
+    display: flow-root;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
   body {
     @apply bg-smoky-black font-sans text-mist antialiased;
     position: relative;
