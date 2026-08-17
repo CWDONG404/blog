@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import avatarUrl from '../assets/avatar-cwd-ruby.webp'
+import avatarUrl from '../assets/avatar-cwd.webp'
 
 const expanded = ref(false)
 
@@ -18,12 +18,12 @@ const contacts = [
       <figure class="profile-avatar shrink-0 overflow-hidden">
         <img
           :src="avatarUrl"
-          alt="CWD 暗黑插画风格头像"
+          alt="CWD 黑银插画风格头像"
           width="512"
           height="512"
           decoding="async"
           fetchpriority="high"
-          class="block h-full w-full object-cover object-center"
+          class="block h-full w-full object-contain object-center"
         />
       </figure>
 

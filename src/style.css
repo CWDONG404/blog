@@ -1,32 +1,32 @@
 @import "tailwindcss";
 
 @theme {
-  /* ===== 暗夜编辑部调色板：雾蓝灰 + 银灰 + 酒红宝石 ===== */
-  --color-smoky-black: hsl(220 17% 7%);
-  --color-eerie-1: hsl(216 13% 15%);
-  --color-eerie-2: hsl(220 15% 11%);
-  --color-onyx: hsl(216 12% 20%);
-  --color-jet: hsl(214 11% 29%);
-  --color-gold: hsl(350 50% 63%);
-  --color-gold-deep: hsl(345 46% 40%);
-  --color-vegas-gold: hsl(346 27% 69%);
-  --color-paper: hsl(210 20% 96%);
-  --color-mist: hsl(214 15% 78%);
-  --color-mist-70: hsl(214 15% 78% / 0.7);
-  --color-silver: hsl(214 18% 86%);
-  --color-danger: hsl(348 55% 58%);
+  /* ===== 黑金银调色板：冷黑空间 + 银灰结构 + 克制金色强调 ===== */
+  --color-smoky-black: #090b0e;
+  --color-eerie-1: #181d23;
+  --color-eerie-2: #11151a;
+  --color-onyx: #222932;
+  --color-jet: #3a424c;
+  --color-gold: #e3c46f;
+  --color-gold-deep: #b78938;
+  --color-vegas-gold: #b7a36b;
+  --color-paper: #f4f6f8;
+  --color-mist: #c7cdd4;
+  --color-mist-70: rgb(199 205 212 / 0.72);
+  --color-silver: #dce2e8;
+  --color-danger: #d06a3a;
 
   /* ===== 字体 ===== */
   --font-sans: "Segoe UI Variable Text", "PingFang SC", "Microsoft YaHei UI", "Noto Sans SC", "Poppins", system-ui, sans-serif;
-  --font-display: "Noto Serif SC", "Source Han Serif SC", "Songti SC", STSong, SimSun, Georgia, serif;
+  --font-display: "Segoe UI Variable Display", "PingFang SC", "Microsoft YaHei UI", "Noto Sans SC", system-ui, sans-serif;
   --font-mono: "Cascadia Code", "JetBrains Mono", Consolas, "Courier New", monospace;
 
   /* ===== 阴影 ===== */
-  --shadow-lift: 0 12px 28px hsl(220 35% 3% / 0.34), inset 0 1px 0 hsl(210 30% 96% / 0.045);
-  --shadow-card: 0 18px 42px hsl(220 35% 3% / 0.34), inset 0 1px 0 hsl(210 30% 96% / 0.05);
-  --shadow-deep: 0 20px 52px hsl(220 40% 2% / 0.42);
-  --shadow-soft: 0 25px 52px hsl(220 35% 3% / 0.22);
-  --shadow-shell: 0 28px 80px hsl(220 40% 2% / 0.46), inset 0 1px 0 hsl(210 30% 96% / 0.055);
+  --shadow-lift: 0 12px 28px rgb(0 0 0 / 0.36), inset 0 1px 0 rgb(244 246 248 / 0.045);
+  --shadow-card: 0 18px 42px rgb(0 0 0 / 0.38), inset 0 1px 0 rgb(244 246 248 / 0.05);
+  --shadow-deep: 0 20px 52px rgb(0 0 0 / 0.46);
+  --shadow-soft: 0 25px 52px rgb(0 0 0 / 0.24);
+  --shadow-shell: 0 28px 80px rgb(0 0 0 / 0.48), inset 0 1px 0 rgb(244 246 248 / 0.055);
 
   /* ===== 断点（沿用原设计 580 / 768 / 1024 / 1250 / 1500） ===== */
   --breakpoint-sm: 580px;
@@ -74,29 +74,14 @@
     isolation: isolate;
     overflow-x: clip;
     background:
-      radial-gradient(circle at 8% 4%, hsl(348 46% 30% / 0.2), transparent 30%),
-      radial-gradient(circle at 92% 18%, hsl(211 24% 28% / 0.18), transparent 31%),
-      radial-gradient(circle at 56% 92%, hsl(329 25% 22% / 0.14), transparent 34%),
-      linear-gradient(145deg, hsl(220 17% 7%), hsl(222 18% 6%) 55%, hsl(220 20% 8%)),
+      radial-gradient(ellipse at 50% -8%, rgb(45 78 116 / 0.2), transparent 44%),
+      radial-gradient(circle at 7% 10%, rgb(227 196 111 / 0.09), transparent 29%),
+      radial-gradient(circle at 94% 24%, rgb(220 226 232 / 0.07), transparent 32%),
+      linear-gradient(180deg, #0b121c 0%, #090d13 42%, #07090c 76%, #050607 100%),
       var(--color-smoky-black);
   }
 
-  /* 雾面织纹：呼应插画背景，动态部分由 ambient-scene 独立负责。 */
-  body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background-image:
-      linear-gradient(118deg, hsl(214 22% 86% / 0.025) 1px, transparent 1px),
-      linear-gradient(62deg, hsl(350 50% 63% / 0.02) 1px, transparent 1px);
-    background-size: 72px 72px;
-    mask-image: radial-gradient(ellipse at center, black 8%, hsl(0 0% 0% / 0.7) 50%, transparent 88%);
-    opacity: 0.62;
-  }
-
-  /* 独立底层场景：让光影在页面空隙与半透明面板下持续可见。 */
+  /* DeepSeek Harness 式底层空间：静态网格、缓慢光晕与单道扫描线。 */
   .ambient-scene {
     position: fixed;
     inset: 0;
@@ -106,107 +91,65 @@
     contain: strict;
   }
 
-  .ambient-orb {
+  .ambient-grid {
     position: absolute;
-    width: clamp(280px, 42vw, 620px);
-    aspect-ratio: 1;
-    border-radius: 50%;
-    filter: blur(38px);
-    opacity: 0.2;
-    will-change: transform;
-  }
-
-  .ambient-orb--ruby {
-    top: -24%;
-    left: -12%;
-    background: radial-gradient(circle, hsl(350 56% 62% / 0.58) 0%, hsl(345 48% 38% / 0.2) 42%, transparent 72%);
-    animation: ambient-orb-ruby 21s ease-in-out infinite alternate;
-  }
-
-  .ambient-orb--mist {
-    top: 18%;
-    right: -18%;
-    background: radial-gradient(circle, hsl(211 30% 66% / 0.34) 0%, hsl(218 24% 42% / 0.12) 44%, transparent 72%);
-    opacity: 0.16;
-    animation: ambient-orb-mist 26s ease-in-out infinite alternate;
-  }
-
-  .ambient-orb--plum {
-    bottom: -34%;
-    left: 34%;
-    background: radial-gradient(circle, hsl(329 32% 45% / 0.38) 0%, hsl(334 28% 28% / 0.12) 44%, transparent 74%);
-    opacity: 0.15;
-    animation: ambient-orb-plum 29s ease-in-out infinite alternate;
-  }
-
-  .ambient-light-sweep {
-    position: absolute;
-    top: -42%;
-    left: -34%;
-    width: 26vw;
-    min-width: 220px;
-    height: 190%;
-    background: linear-gradient(90deg, transparent, hsl(214 22% 88% / 0.12), hsl(350 50% 67% / 0.055), transparent);
-    filter: blur(24px);
-    opacity: 0.34;
-    transform: rotate(18deg) translate3d(0, 0, 0);
-    will-change: transform;
-    animation: ambient-light-sweep 24s ease-in-out infinite;
-  }
-
-  .ambient-particles {
-    position: absolute;
-    inset: -90px;
+    inset: -56px;
     background-image:
-      radial-gradient(circle, hsl(214 22% 88% / 0.42) 0 1px, transparent 1.7px),
-      radial-gradient(circle, hsl(350 50% 67% / 0.38) 0 1px, transparent 1.8px),
-      radial-gradient(circle, hsl(329 28% 58% / 0.3) 0 1.2px, transparent 2px);
-    background-position: 14px 22px, 78px 54px, 136px 96px;
-    background-size: 190px 190px, 270px 270px, 340px 340px;
-    opacity: 0.3;
-    transform: translate3d(-28px, -18px, 0);
-    will-change: transform, opacity;
-    animation: ambient-particle-drift 18s ease-in-out infinite alternate;
+      linear-gradient(rgb(220 226 232 / 0.038) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(220 226 232 / 0.038) 1px, transparent 1px),
+      radial-gradient(circle, rgb(227 196 111 / 0.34) 0 1px, transparent 1.7px);
+    background-position: 0 0, 0 0, 14px 14px;
+    background-size: 56px 56px, 56px 56px, 112px 112px;
+    -webkit-mask-image: radial-gradient(ellipse at 50% 35%, #000 10%, rgb(0 0 0 / 0.76) 54%, transparent 90%);
+    mask-image: radial-gradient(ellipse at 50% 35%, #000 10%, rgb(0 0 0 / 0.76) 54%, transparent 90%);
+    opacity: 0.7;
   }
 
-  @keyframes ambient-orb-ruby {
-    to { transform: translate3d(18vw, 12vh, 0) scale(1.12); }
+  .ambient-glow {
+    position: absolute;
+    inset: -16%;
+    background:
+      radial-gradient(ellipse 46% 34% at 12% 12%, rgb(227 196 111 / 0.14), transparent 72%),
+      radial-gradient(ellipse 42% 34% at 84% 26%, rgb(111 145 181 / 0.13), transparent 74%),
+      radial-gradient(ellipse 38% 28% at 76% 86%, rgb(220 226 232 / 0.075), transparent 76%);
+    transform: translate3d(-2%, -1%, 0) scale(1);
+    animation: ambient-glow-drift 22s ease-in-out infinite alternate;
+    will-change: transform;
   }
 
-  @keyframes ambient-orb-mist {
-    to { transform: translate3d(-20vw, 18vh, 0) scale(0.92); }
+  .ambient-scan {
+    position: absolute;
+    top: -40%;
+    left: -28%;
+    width: clamp(180px, 20vw, 320px);
+    height: 180%;
+    background: linear-gradient(90deg, transparent, rgb(227 196 111 / 0.08) 43%, rgb(220 226 232 / 0.07) 51%, transparent 66%);
+    opacity: 0.76;
+    transform: translate3d(-30vw, 0, 0) rotate(18deg);
+    will-change: transform;
+    animation: ambient-scan-pass 18s linear infinite;
+    animation-delay: -6s;
   }
 
-  @keyframes ambient-orb-plum {
-    to { transform: translate3d(10vw, -17vh, 0) scale(1.08); }
+  @keyframes ambient-glow-drift {
+    to { transform: translate3d(3%, 2%, 0) scale(1.04); }
   }
 
-  @keyframes ambient-light-sweep {
-    0%,
-    12% { transform: rotate(18deg) translate3d(0, 0, 0); }
-    82%,
-    100% { transform: rotate(18deg) translate3d(165vw, 0, 0); }
-  }
-
-  @keyframes ambient-particle-drift {
-    0% {
-      transform: translate3d(-28px, -18px, 0);
-      opacity: 0.34;
-    }
-    100% {
-      transform: translate3d(36px, 28px, 0);
-      opacity: 0.62;
-    }
+  @keyframes ambient-scan-pass {
+    to { transform: translate3d(165vw, 0, 0) rotate(18deg); }
   }
 
   @media (max-width: 579px) {
-    .ambient-orb {
-      filter: blur(52px);
-      opacity: 0.14;
+    .ambient-grid {
+      background-size: 44px 44px, 44px 44px, 88px 88px;
+      opacity: 0.42;
     }
-    .ambient-orb--plum,
-    .ambient-light-sweep,
-    .ambient-particles {
+    .ambient-glow {
+      animation: none;
+      opacity: 0.72;
+      will-change: auto;
+    }
+    .ambient-scan {
       display: none;
     }
   }
@@ -248,10 +191,10 @@
   /* ===== 主容器面板（侧栏 / 页面卡片） ===== */
   .surface-card {
     @apply relative z-[1] rounded-[20px] border border-jet bg-eerie-2 p-4 shadow-lift sm:p-8;
-    border-color: hsl(214 18% 72% / 0.15);
+    border-color: rgb(220 226 232 / 0.14);
     background:
-      linear-gradient(145deg, hsl(210 30% 96% / 0.045), transparent 38%),
-      hsl(220 16% 10% / 0.9);
+      linear-gradient(145deg, rgb(244 246 248 / 0.04), transparent 38%),
+      rgb(17 21 26 / 0.92);
     -webkit-backdrop-filter: blur(14px) saturate(110%);
     backdrop-filter: blur(14px) saturate(110%);
   }
@@ -266,8 +209,8 @@
     position: relative;
     z-index: 1;
     border-radius: 14px;
-    border: 1px solid hsl(214 18% 72% / 0.1);
-    background: linear-gradient(145deg, hsl(214 18% 82% / 0.13), hsl(350 48% 52% / 0.07) 46%, transparent 76%);
+    border: 1px solid rgb(220 226 232 / 0.1);
+    background: linear-gradient(145deg, rgb(220 226 232 / 0.13), rgb(227 196 111 / 0.075) 46%, transparent 76%);
     box-shadow: var(--shadow-card);
     transition:
       transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
@@ -281,8 +224,8 @@
     z-index: -1;
     border-radius: inherit;
     background:
-      linear-gradient(to bottom right, hsl(214 18% 26% / 0.24) 3%, transparent 100%),
-      hsl(218 14% 14% / 0.96);
+      linear-gradient(to bottom right, rgb(220 226 232 / 0.09) 3%, transparent 100%),
+      rgb(24 29 35 / 0.97);
   }
   .gradient-card--solid::before {
     background: var(--color-eerie-1);
@@ -292,8 +235,8 @@
   .tech-card:hover,
   .blog-card:hover {
     transform: translateY(-2px);
-    border-color: hsl(350 50% 63% / 0.32);
-    box-shadow: 0 22px 50px hsl(220 40% 2% / 0.42), inset 0 1px 0 hsl(210 30% 96% / 0.06);
+    border-color: rgb(227 196 111 / 0.34);
+    box-shadow: 0 22px 50px rgb(0 0 0 / 0.44), inset 0 1px 0 rgb(244 246 248 / 0.06);
   }
 
   /* ===== 图标盒 ===== */
@@ -333,7 +276,7 @@
     flex: 0 0 42px;
   }
 
-  /* ===== 编辑部式标题与宝石红短线 ===== */
+  /* ===== 技术编辑部式标题与金银短线 ===== */
   .article-title {
     position: relative;
     padding-bottom: 7px;
@@ -367,26 +310,26 @@
     }
   }
 
-  /* ===== 头像：保留插画的方形构图与银灰 / 酒红细节 ===== */
+  /* ===== 头像：完整保留用户插画构图，以黑金银框体承接 ===== */
   .profile-avatar {
     position: relative;
     width: 80px;
     height: 80px;
     aspect-ratio: 1;
-    border: 1px solid hsl(350 50% 63% / 0.28);
+    border: 1px solid rgb(227 196 111 / 0.34);
     border-radius: 16px;
     background: hsl(218 14% 13%);
     box-shadow:
-      0 18px 42px hsl(220 40% 2% / 0.36),
-      0 0 24px hsl(350 50% 50% / 0.08),
-      inset 0 1px 0 hsl(210 30% 96% / 0.12);
+      0 18px 42px rgb(0 0 0 / 0.38),
+      0 0 24px rgb(227 196 111 / 0.08),
+      inset 0 1px 0 rgb(244 246 248 / 0.12);
   }
   .profile-avatar::after {
     content: "";
     position: absolute;
     inset: 5px;
     pointer-events: none;
-    border: 1px solid hsl(214 22% 88% / 0.16);
+    border: 1px solid rgb(220 226 232 / 0.18);
     border-radius: 11px;
   }
   .profile-name {
@@ -511,13 +454,13 @@
   .corner-btn:hover,
   .corner-btn:focus-visible {
     color: var(--color-gold);
-    border-color: hsl(350 50% 63% / 0.4);
-    background: linear-gradient(to bottom right, hsl(350 50% 63% / 0.34) 0%, transparent 58%);
+    border-color: rgb(227 196 111 / 0.42);
+    background: linear-gradient(to bottom right, rgb(227 196 111 / 0.34) 0%, transparent 58%);
   }
   .corner-btn:hover::before,
   .corner-btn:focus-visible::before {
     background:
-      linear-gradient(135deg, hsl(350 50% 63% / 0.16) 0%, transparent 59.86%),
+      linear-gradient(135deg, rgb(227 196 111 / 0.17) 0%, transparent 59.86%),
       hsl(218 14% 14%);
   }
   @media (min-width: 580px) {
@@ -724,8 +667,8 @@
   }
   .project-card:hover .project-visual,
   .project-card:focus-visible .project-visual {
-    border-color: hsl(350 50% 63% / 0.42);
-    box-shadow: 0 22px 46px hsl(220 40% 2% / 0.42), 0 0 0 1px hsl(350 50% 63% / 0.08);
+    border-color: rgb(227 196 111 / 0.44);
+    box-shadow: 0 22px 46px rgb(0 0 0 / 0.44), 0 0 0 1px rgb(227 196 111 / 0.09);
   }
   .tech-tag {
     border-color: hsl(214 18% 72% / 0.13);
@@ -736,7 +679,7 @@
       background 0.2s ease;
   }
   .tech-card:hover .tech-tag {
-    border-color: hsl(350 50% 63% / 0.2);
+    border-color: rgb(227 196 111 / 0.22);
   }
 
   /* ===== 博客封面 ===== */
@@ -757,8 +700,8 @@
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(118deg, hsl(214 22% 88% / 0.04) 1px, transparent 1px),
-      linear-gradient(62deg, hsl(350 50% 63% / 0.035) 1px, transparent 1px);
+      linear-gradient(118deg, rgb(220 226 232 / 0.04) 1px, transparent 1px),
+      linear-gradient(62deg, rgb(227 196 111 / 0.035) 1px, transparent 1px);
     background-size: 32px 32px;
   }
   .blog-cover ion-icon {
@@ -774,13 +717,13 @@
     letter-spacing: 1px;
   }
   .blog-cover--ai {
-    background: radial-gradient(circle at 50% 24%, hsl(348 38% 25%), hsl(220 15% 11%) 72%);
+    background: radial-gradient(circle at 50% 24%, hsl(41 34% 25%), hsl(220 15% 11%) 72%);
   }
   .blog-cover--rag {
     background: radial-gradient(circle at 28% 24%, hsl(211 28% 27%), hsl(220 15% 11%) 72%);
   }
   .blog-cover--testing {
-    background: radial-gradient(circle at 68% 24%, hsl(329 26% 24%), hsl(220 15% 11%) 72%);
+    background: radial-gradient(circle at 68% 24%, hsl(215 12% 25%), hsl(220 15% 11%) 72%);
   }
   @media (min-width: 580px) {
     .blog-cover {
@@ -880,7 +823,7 @@
   .post-toc button.active {
     color: var(--color-gold);
     border-left-color: var(--color-gold);
-    background: hsl(350 50% 63% / 0.07);
+    background: rgb(227 196 111 / 0.075);
   }
 
   /* ===== 返回 / 文章导航 / 空状态链接 ===== */
@@ -969,7 +912,7 @@
     padding: 2px 6px;
     border-radius: 5px;
     background: var(--color-onyx);
-    color: hsl(350 54% 74%);
+    color: hsl(43 72% 74%);
     font-family: var(--font-mono);
     font-size: 0.9em;
   }
