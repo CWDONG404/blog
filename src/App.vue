@@ -4,6 +4,14 @@ import SiteNav from './components/SiteNav.vue'
 </script>
 
 <template>
+  <div class="ambient-scene" aria-hidden="true">
+    <span class="ambient-orb ambient-orb--gold"></span>
+    <span class="ambient-orb ambient-orb--blue"></span>
+    <span class="ambient-orb ambient-orb--amber"></span>
+    <span class="ambient-particles"></span>
+    <span class="ambient-light-sweep"></span>
+  </div>
+
   <main
     class="page-main relative z-[1] mx-3 mt-4 mb-[72px] min-w-[259px] sm:mt-[60px] sm:mb-24 lg:mb-[60px] xl:mx-auto xl:flex xl:max-w-[1200px] xl:items-stretch xl:justify-center xl:gap-6"
   >

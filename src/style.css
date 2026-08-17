@@ -64,60 +64,140 @@
     min-height: 100dvh;
     isolation: isolate;
     overflow-x: clip;
-  }
-
-  /* 最底层环境光：缓慢游走，不干扰前景内容 */
-  body::before {
-    content: "";
-    position: fixed;
-    inset: -22%;
-    z-index: 0;
-    pointer-events: none;
     background:
-      radial-gradient(circle at 16% 24%, hsl(45 100% 72% / 0.13), transparent 22%),
-      radial-gradient(circle at 84% 68%, hsl(35 92% 58% / 0.095), transparent 26%),
-      radial-gradient(circle at 58% 10%, hsl(218 42% 30% / 0.12), transparent 21%),
-      radial-gradient(circle at 46% 88%, hsl(190 34% 25% / 0.07), transparent 23%);
-    filter: blur(22px);
-    will-change: transform;
-    animation: ambient-glow 20s ease-in-out infinite alternate;
+      radial-gradient(circle at 12% 8%, hsl(45 72% 22% / 0.2), transparent 28%),
+      radial-gradient(circle at 88% 72%, hsl(217 35% 20% / 0.15), transparent 30%),
+      var(--color-smoky-black);
   }
 
-  @keyframes ambient-glow {
-    0% { transform: translate3d(-2.5%, -1.5%, 0) rotate(-1deg) scale(1); }
-    50% { transform: translate3d(1.5%, 2%, 0) rotate(1deg) scale(1.045); }
-    100% { transform: translate3d(3%, -1%, 0) rotate(0deg) scale(1.02); }
-  }
-
-  /* 漂移网格与稀疏光点 */
+  /* 静态工程网格；动态部分由 ambient-scene 独立负责。 */
   body::after {
     content: "";
     position: fixed;
-    inset: -84px;
+    inset: 0;
     z-index: 0;
     pointer-events: none;
     background-image:
-      linear-gradient(118deg, transparent 36%, hsl(45 100% 72% / 0.035) 50%, transparent 64%),
-      linear-gradient(hsl(45 100% 72% / 0.032) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(45 100% 72% / 0.032) 1px, transparent 1px),
-      radial-gradient(circle, hsl(45 100% 76% / 0.22) 0 1px, transparent 1.6px);
-    background-position: center, 0 0, 0 0, 18px 12px;
-    background-size: 100% 100%, 42px 42px, 42px 42px, 168px 168px;
+      linear-gradient(hsl(45 100% 72% / 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(45 100% 72% / 0.035) 1px, transparent 1px);
+    background-size: 42px 42px;
     mask-image: radial-gradient(ellipse at center, black 12%, hsl(0 0% 0% / 0.78) 48%, transparent 86%);
-    opacity: 0.82;
-    transform: translate3d(-21px, -16px, 0);
-    will-change: transform, opacity;
-    animation: ambient-grid-drift 28s ease-in-out infinite alternate;
+    opacity: 0.72;
   }
 
-  @keyframes ambient-grid-drift {
+  /* 独立底层场景：让光影在页面空隙与半透明面板下持续可见。 */
+  .ambient-scene {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+    contain: strict;
+  }
+
+  .ambient-orb {
+    position: absolute;
+    width: clamp(280px, 42vw, 620px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    filter: blur(32px);
+    opacity: 0.22;
+    will-change: transform;
+  }
+
+  .ambient-orb--gold {
+    top: -24%;
+    left: -12%;
+    background: radial-gradient(circle, hsl(45 100% 66% / 0.78) 0%, hsl(39 92% 48% / 0.22) 42%, transparent 72%);
+    animation: ambient-orb-gold 16s ease-in-out infinite alternate;
+  }
+
+  .ambient-orb--blue {
+    top: 18%;
+    right: -18%;
+    background: radial-gradient(circle, hsl(212 58% 58% / 0.38) 0%, hsl(226 42% 44% / 0.12) 44%, transparent 72%);
+    opacity: 0.14;
+    animation: ambient-orb-blue 21s ease-in-out infinite alternate;
+  }
+
+  .ambient-orb--amber {
+    bottom: -34%;
+    left: 34%;
+    background: radial-gradient(circle, hsl(30 100% 60% / 0.46) 0%, hsl(18 78% 43% / 0.14) 44%, transparent 74%);
+    opacity: 0.17;
+    animation: ambient-orb-amber 24s ease-in-out infinite alternate;
+  }
+
+  .ambient-light-sweep {
+    position: absolute;
+    top: -42%;
+    left: -34%;
+    width: 26vw;
+    min-width: 220px;
+    height: 190%;
+    background: linear-gradient(90deg, transparent, hsl(45 100% 72% / 0.17), hsl(45 100% 78% / 0.07), transparent);
+    filter: blur(24px);
+    opacity: 0.72;
+    transform: rotate(18deg) translate3d(0, 0, 0);
+    will-change: transform;
+    animation: ambient-light-sweep 14s ease-in-out infinite;
+  }
+
+  .ambient-particles {
+    position: absolute;
+    inset: -90px;
+    background-image:
+      radial-gradient(circle, hsl(45 100% 78% / 0.58) 0 1px, transparent 1.7px),
+      radial-gradient(circle, hsl(210 84% 72% / 0.34) 0 1px, transparent 1.8px),
+      radial-gradient(circle, hsl(35 100% 70% / 0.42) 0 1.2px, transparent 2px);
+    background-position: 14px 22px, 78px 54px, 136px 96px;
+    background-size: 190px 190px, 270px 270px, 340px 340px;
+    opacity: 0.5;
+    transform: translate3d(-28px, -18px, 0);
+    will-change: transform, opacity;
+    animation: ambient-particle-drift 13s ease-in-out infinite alternate;
+  }
+
+  @keyframes ambient-orb-gold {
+    to { transform: translate3d(18vw, 12vh, 0) scale(1.12); }
+  }
+
+  @keyframes ambient-orb-blue {
+    to { transform: translate3d(-20vw, 18vh, 0) scale(0.92); }
+  }
+
+  @keyframes ambient-orb-amber {
+    to { transform: translate3d(10vw, -17vh, 0) scale(1.08); }
+  }
+
+  @keyframes ambient-light-sweep {
+    0%,
+    12% { transform: rotate(18deg) translate3d(0, 0, 0); }
+    82%,
+    100% { transform: rotate(18deg) translate3d(165vw, 0, 0); }
+  }
+
+  @keyframes ambient-particle-drift {
     0% {
-      transform: translate3d(-21px, -16px, 0);
-      opacity: 0.68;
+      transform: translate3d(-28px, -18px, 0);
+      opacity: 0.34;
     }
     100% {
-      transform: translate3d(21px, 16px, 0);
-      opacity: 0.9;
+      transform: translate3d(36px, 28px, 0);
+      opacity: 0.62;
+    }
+  }
+
+  @media (max-width: 579px) {
+    .ambient-orb {
+      filter: blur(58px);
+      opacity: 0.16;
+    }
+    .ambient-light-sweep {
+      opacity: 0.42;
+    }
+    .ambient-particles {
+      opacity: 0.32;
     }
   }
 
@@ -158,6 +238,9 @@
   /* ===== 主容器面板（侧栏 / 页面卡片） ===== */
   .surface-card {
     @apply relative z-[1] rounded-[20px] border border-jet bg-eerie-2 p-4 shadow-lift sm:p-8;
+    background:
+      linear-gradient(145deg, hsl(0 0% 100% / 0.018), transparent 42%),
+      hsl(240 2% 12% / 0.94);
   }
 
   /* 面板响应式宽度：全宽 / 520 / 700 / 950 / 自适应 */
@@ -505,13 +588,14 @@
       display: flex;
       align-items: center;
       min-height: 64px;
-      margin-top: -32px;
-      margin-bottom: 20px;
+      margin-top: -12px;
+      margin-bottom: 24px;
       padding-right: 455px;
     }
     .about-heading .article-title {
       max-width: 100%;
       margin: 0;
+      line-height: 1.25;
       white-space: nowrap;
     }
   }
@@ -868,9 +952,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  body::before,
-  body::after {
+  .ambient-scene * {
     animation: none !important;
+    will-change: auto !important;
   }
 
   *,
