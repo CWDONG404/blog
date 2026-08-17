@@ -5,9 +5,9 @@ import SiteNav from './components/SiteNav.vue'
 
 <template>
   <div class="ambient-scene" aria-hidden="true">
-    <span class="ambient-orb ambient-orb--gold"></span>
-    <span class="ambient-orb ambient-orb--blue"></span>
-    <span class="ambient-orb ambient-orb--amber"></span>
+    <span class="ambient-orb ambient-orb--ruby"></span>
+    <span class="ambient-orb ambient-orb--mist"></span>
+    <span class="ambient-orb ambient-orb--plum"></span>
     <span class="ambient-particles"></span>
     <span class="ambient-light-sweep"></span>
   </div>

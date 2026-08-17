@@ -30,13 +30,13 @@ const currentFocus = [
     </header>
 
     <section class="mb-6">
-      <p class="px-2.5 text-justify text-sm leading-[1.6] font-light text-mist sm:text-[15px]">
+      <p class="px-2.5 text-justify text-sm leading-[1.6] font-normal text-mist sm:text-[15px]">
         我的技术能力围绕“工程自动化、安全测试与 AI 应用落地”展开。下面列出实际使用或持续实践中的技术，不使用主观百分比衡量熟练度。
       </p>
     </section>
 
     <section class="mb-9 grid grid-cols-1 gap-5 md:grid-cols-2">
-      <div v-for="group in groups" :key="group.title" class="gradient-card cursor-default p-[22px]">
+      <div v-for="group in groups" :key="group.title" class="gradient-card tech-card cursor-default p-[22px]">
         <div class="mb-[18px] flex items-center gap-3.5">
           <div class="icon-box icon-box--fixed"><ion-icon :name="group.icon"></ion-icon></div>
           <h3 class="text-base text-paper sm:text-lg">{{ group.title }}</h3>
@@ -45,7 +45,7 @@ const currentFocus = [
           <li
             v-for="item in group.items"
             :key="item"
-            class="rounded-lg border border-jet bg-onyx px-2.5 py-1.5 text-[13px] leading-[1.3] text-mist sm:text-[15px]"
+            class="tech-tag rounded-lg border border-jet bg-onyx px-2.5 py-1.5 text-[13px] leading-[1.3] text-mist sm:text-[15px]"
           >
             {{ item }}
           </li>
@@ -58,7 +58,7 @@ const currentFocus = [
       <div class="gradient-card grid cursor-default gap-[18px] p-[22px]">
         <div v-for="focus in currentFocus" :key="focus.title" class="grid gap-1">
           <strong class="text-[15px] text-gold">{{ focus.title }}</strong>
-          <span class="text-sm leading-[1.7] font-light text-mist sm:text-[15px]">{{ focus.text }}</span>
+          <span class="text-sm leading-[1.7] font-normal text-mist sm:text-[15px]">{{ focus.text }}</span>
         </div>
       </div>
     </section>

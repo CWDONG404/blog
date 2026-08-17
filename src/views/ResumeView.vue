@@ -41,7 +41,7 @@ const careerPath = ['测试开发', 'AI Application Development', 'AI Full Stack
         <li v-for="item in workExperience" :key="item.title" class="timeline-item">
           <h4 class="mb-[7px] text-sm leading-[1.3] text-paper sm:text-[15px]">{{ item.title }}</h4>
           <span class="leading-[1.6] text-vegas-gold">{{ item.period }}</span>
-          <p class="text-justify leading-[1.6] font-light text-mist xl:max-w-[700px]">{{ item.text }}</p>
+          <p class="text-justify leading-[1.6] font-normal text-mist xl:max-w-[700px]">{{ item.text }}</p>
         </li>
       </ol>
     </section>
@@ -54,14 +54,14 @@ const careerPath = ['测试开发', 'AI Application Development', 'AI Full Stack
       <ol class="timeline-list">
         <li v-for="item in education" :key="item.title" class="timeline-item">
           <h4 class="mb-[7px] text-sm leading-[1.3] text-paper sm:text-[15px]">{{ item.title }}</h4>
-          <p class="text-justify leading-[1.6] font-light text-mist xl:max-w-[700px]">{{ item.text }}</p>
+          <p class="text-justify leading-[1.6] font-normal text-mist xl:max-w-[700px]">{{ item.text }}</p>
         </li>
       </ol>
     </section>
 
     <section class="mb-2.5">
       <h3 class="mb-5 text-lg text-paper sm:text-2xl">职业方向</h3>
-      <div class="gradient-card flex cursor-default flex-wrap items-center gap-2.5 p-[22px] text-sm font-light text-mist sm:text-[15px]">
+      <div class="gradient-card flex cursor-default flex-wrap items-center gap-2.5 p-[22px] text-sm font-normal text-mist sm:text-[15px]">
         <template v-for="(stage, index) in careerPath" :key="stage">
           <ion-icon v-if="index > 0" name="arrow-forward-outline" class="text-gold"></ion-icon>
           <span>{{ stage }}</span>

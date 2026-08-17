@@ -23,7 +23,7 @@ function formatDate(date: string) {
         <li v-for="post in posts" :key="post.slug">
           <RouterLink
             :to="`/blog/${post.slug}`"
-            class="gradient-card gradient-card--solid group block h-full overflow-hidden rounded-2xl shadow-soft"
+            class="gradient-card gradient-card--solid blog-card group block h-full overflow-hidden rounded-2xl shadow-soft"
           >
             <figure class="blog-cover" :class="`blog-cover--${post.cover}`">
               <ion-icon :name="coverIcons[post.cover]"></ion-icon>
@@ -31,14 +31,14 @@ function formatDate(date: string) {
             </figure>
             <div class="p-4 sm:p-6">
               <div class="mb-2.5 flex items-center gap-[7px]">
-                <p class="text-sm font-light text-mist-70">{{ post.category }}</p>
+                <p class="text-sm font-normal text-mist-70">{{ post.category }}</p>
                 <span class="h-1 w-1 rounded-full bg-mist-70"></span>
-                <time :datetime="post.date" class="text-sm font-light text-mist-70">{{ formatDate(post.date) }}</time>
+                <time :datetime="post.date" class="text-sm font-normal text-mist-70">{{ formatDate(post.date) }}</time>
               </div>
               <h3 class="mb-2.5 text-lg leading-[1.3] text-paper transition-colors duration-[250ms] group-hover:text-gold sm:text-2xl">
                 {{ post.title }}
               </h3>
-              <p class="text-justify text-sm leading-[1.6] font-light text-mist sm:text-[15px]">{{ post.summary }}</p>
+              <p class="text-justify text-sm leading-[1.6] font-normal text-mist sm:text-[15px]">{{ post.summary }}</p>
             </div>
           </RouterLink>
         </li>

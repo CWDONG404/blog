@@ -15,7 +15,7 @@ const links = [
         <RouterLink
           :to="link.to"
           active-class="text-gold!"
-          class="block px-[7px] py-5 text-xs whitespace-nowrap text-mist transition-colors duration-[250ms] hover:text-mist-70 sm:text-sm md:text-[15px] lg:font-medium"
+          class="nav-link block px-[7px] py-5 text-xs whitespace-nowrap text-mist transition-colors duration-[250ms] hover:text-paper sm:text-sm md:text-[15px] lg:font-medium"
         >
           {{ link.label }}
         </RouterLink>

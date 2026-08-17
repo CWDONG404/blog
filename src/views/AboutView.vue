@@ -83,11 +83,11 @@ onBeforeUnmount(() => window.clearTimeout(typingTimer))
     </header>
 
     <section class="sm:mb-10">
-      <p class="mb-4 px-2.5 text-justify text-sm leading-[1.6] font-light text-mist sm:text-[15px]">
+      <p class="mb-4 px-2.5 text-justify text-sm leading-[1.6] font-normal text-mist sm:text-[15px]">
         你好，我是 CWD，一名把测试思维、全栈开发和 AI 工具放进同一套工作流里的工程师。目前在 360安全能力中心 ·
         冰刃研究院从事安全产品、Windows 驱动测试与信创适配工作。
       </p>
-      <p class="mb-4 px-2.5 text-justify text-sm leading-[1.6] font-light text-mist sm:text-[15px]">
+      <p class="mb-4 px-2.5 text-justify text-sm leading-[1.6] font-normal text-mist sm:text-[15px]">
         我习惯用 Python 搭建工程骨架，用 Vue 完成交互表达，也乐于通过 Vibe Coding
         快速验证想法。速度对我很重要，但可复现、可维护和真正解决问题同样重要。
       </p>
@@ -96,13 +96,17 @@ onBeforeUnmount(() => window.clearTimeout(typingTimer))
     <section class="mb-9">
       <h3 class="mb-5 text-lg text-paper sm:text-2xl">我的方向</h3>
       <ul class="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-x-6 lg:gap-y-5">
-        <li v-for="service in services" :key="service.title" class="gradient-card p-5 sm:flex sm:items-start sm:gap-[18px] sm:p-8">
+        <li
+          v-for="service in services"
+          :key="service.title"
+          class="gradient-card service-card p-5 sm:flex sm:items-start sm:gap-[18px] sm:p-8"
+        >
           <div class="mb-2.5 sm:mt-1.5 sm:mb-0">
             <ion-icon :name="service.icon" class="mx-auto block text-[40px] text-gold [--ionicon-stroke-width:28px]"></ion-icon>
           </div>
           <div class="text-center sm:text-left">
             <h4 class="mb-[7px] text-base text-paper sm:text-lg">{{ service.title }}</h4>
-            <p class="text-sm leading-[1.6] font-light text-mist sm:text-[15px]">{{ service.text }}</p>
+            <p class="text-sm leading-[1.6] font-normal text-mist sm:text-[15px]">{{ service.text }}</p>
           </div>
         </li>
       </ul>
@@ -112,7 +116,7 @@ onBeforeUnmount(() => window.clearTimeout(typingTimer))
       <h3 class="mb-5 text-lg text-paper sm:text-2xl">我的开发主张</h3>
       <div class="gradient-card grid cursor-default gap-3 p-[22px]">
         <p class="text-base leading-normal font-medium text-paper">把一个模糊想法，尽快变成真正可以使用的产品。</p>
-        <p class="text-sm leading-[1.7] font-light text-mist sm:text-[15px]">
+        <p class="text-sm leading-[1.7] font-normal text-mist sm:text-[15px]">
           我偏爱先用 Vibe Coding
           拉通交互与业务闭环，再用测试开发经验补齐边界、证据和质量。无论是安全工具、效率平台还是 AI
           应用，最终都应该经得住真实场景，而不只停留在一次漂亮的演示。

@@ -32,8 +32,8 @@ const projects = [
       </p>
       <ul class="grid grid-cols-1 gap-8 md:grid-cols-2">
         <li v-for="project in projects" :key="project.url" class="animate-scale-up">
-          <a :href="project.url" target="_blank" rel="noopener noreferrer" class="group block w-full">
-            <figure class="relative mb-4 aspect-[8/5] w-full overflow-hidden rounded-2xl bg-eerie-1">
+          <a :href="project.url" target="_blank" rel="noopener noreferrer" class="project-card group block w-full">
+            <figure class="project-visual relative mb-4 aspect-[8/5] w-full overflow-hidden rounded-2xl bg-eerie-1">
               <div class="absolute inset-0 z-[1] bg-black/0 transition-colors duration-[250ms] group-hover:bg-black/50"></div>
               <div
                 class="absolute top-1/2 left-1/2 z-[2] flex -translate-x-1/2 -translate-y-1/2 scale-75 items-center justify-center rounded-xl bg-jet p-[18px] text-xl text-gold opacity-0 transition-all duration-[250ms] group-hover:scale-100 group-hover:opacity-100"
@@ -50,8 +50,8 @@ const projects = [
               />
             </figure>
             <h3 class="ml-2.5 text-[15px] leading-[1.3] font-normal text-paper">{{ project.title }}</h3>
-            <p class="ml-2.5 text-sm font-light text-mist-70">{{ project.category }}</p>
-            <p class="mx-2.5 mt-2 text-[13px] leading-[1.6] font-light text-mist">{{ project.description }}</p>
+            <p class="ml-2.5 text-sm font-normal text-mist-70">{{ project.category }}</p>
+            <p class="mx-2.5 mt-2 text-[13px] leading-[1.6] font-normal text-mist">{{ project.description }}</p>
           </a>
         </li>
       </ul>

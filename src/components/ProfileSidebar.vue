@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import avatarUrl from '../assets/avatar-luffy-pixel.webp'
+import avatarUrl from '../assets/avatar-cwd-ruby.webp'
 
 const expanded = ref(false)
 
@@ -15,26 +15,26 @@ const contacts = [
 <template>
   <aside class="surface-card panel-sizing profile-sidebar mb-4 sm:mb-8" :class="{ expanded }">
     <div class="relative flex items-center gap-4 sm:gap-6 xl:flex-col">
-      <figure
-        class="shrink-0 overflow-hidden rounded-[20px] bg-linear-to-br from-[hsl(240,1%,25%)] to-[hsl(0,0%,19%)] sm:rounded-[30px]"
-      >
+      <figure class="profile-avatar shrink-0 overflow-hidden">
         <img
           :src="avatarUrl"
-          alt="路飞主题像素头像"
-          width="80"
-          height="80"
-          class="block h-20 w-20 object-cover [image-rendering:pixelated] sm:h-[120px] sm:w-[120px] xl:h-[150px] xl:w-[150px]"
+          alt="CWD 暗黑插画风格头像"
+          width="512"
+          height="512"
+          decoding="async"
+          fetchpriority="high"
+          class="block h-full w-full object-cover object-center"
         />
       </figure>
 
       <div class="min-w-0">
         <h1
-          class="mb-2.5 text-[17px] font-medium tracking-[-0.25px] text-paper sm:mb-4 sm:text-[26px] xl:text-center xl:whitespace-nowrap"
+          class="profile-name mb-2.5 text-[17px] font-medium tracking-[-0.25px] text-paper sm:mb-4 sm:text-[26px] xl:text-center xl:whitespace-nowrap"
           title="CWD"
         >
           CWD
         </h1>
-        <p class="w-max rounded-lg bg-onyx px-3 py-[3px] text-xs font-light text-white sm:px-2.5 sm:py-[5px] xl:mx-auto">
+        <p class="profile-role w-max rounded-lg bg-onyx px-3 py-[3px] text-xs font-normal text-white sm:px-2.5 sm:py-[5px] xl:mx-auto">
           高级测试开发工程师
         </p>
         <a class="profile-email" href="mailto:498567496@qq.com">498567496@qq.com</a>
@@ -64,13 +64,13 @@ const contacts = [
             <a
               v-if="contact.href"
               :href="contact.href"
-              class="block break-all text-[13px] text-paper transition-colors duration-[250ms] hover:text-gold sm:text-[15px] xl:text-sm xl:font-light"
+              class="block break-all text-[13px] text-paper transition-colors duration-[250ms] hover:text-gold sm:text-[15px] xl:text-sm xl:font-normal"
               >{{ contact.value }}</a
             >
-            <address v-else-if="contact.isAddress" class="text-[13px] break-words text-paper not-italic sm:text-[15px] xl:text-sm xl:font-light">{{
+            <address v-else-if="contact.isAddress" class="text-[13px] break-words text-paper not-italic sm:text-[15px] xl:text-sm xl:font-normal">{{
               contact.value
             }}</address>
-            <p v-else class="text-[13px] break-words text-paper sm:text-[15px] xl:text-sm xl:font-light">{{ contact.value }}</p>
+            <p v-else class="text-[13px] break-words text-paper sm:text-[15px] xl:text-sm xl:font-normal">{{ contact.value }}</p>
           </div>
         </li>
       </ul>
