@@ -53,6 +53,7 @@
 
 @layer base {
   html {
+    background: var(--color-smoky-black);
     overflow-x: clip;
   }
 
@@ -65,39 +66,59 @@
     overflow-x: clip;
   }
 
-  /* 环境光晕 */
+  /* 最底层环境光：缓慢游走，不干扰前景内容 */
   body::before {
     content: "";
     position: fixed;
-    inset: -18%;
+    inset: -22%;
     z-index: 0;
     pointer-events: none;
     background:
-      radial-gradient(circle at 18% 22%, hsl(45 100% 72% / 0.075), transparent 24%),
-      radial-gradient(circle at 82% 72%, hsl(38 88% 58% / 0.055), transparent 27%),
-      radial-gradient(circle at 56% 8%, hsl(220 35% 28% / 0.08), transparent 22%);
-    filter: blur(18px);
-    animation: ambient-glow 18s ease-in-out infinite alternate;
+      radial-gradient(circle at 16% 24%, hsl(45 100% 72% / 0.13), transparent 22%),
+      radial-gradient(circle at 84% 68%, hsl(35 92% 58% / 0.095), transparent 26%),
+      radial-gradient(circle at 58% 10%, hsl(218 42% 30% / 0.12), transparent 21%),
+      radial-gradient(circle at 46% 88%, hsl(190 34% 25% / 0.07), transparent 23%);
+    filter: blur(22px);
+    will-change: transform;
+    animation: ambient-glow 20s ease-in-out infinite alternate;
   }
 
   @keyframes ambient-glow {
-    from { transform: translate3d(-1.5%, -1%, 0) scale(1); }
-    to { transform: translate3d(1.5%, 1%, 0) scale(1.04); }
+    0% { transform: translate3d(-2.5%, -1.5%, 0) rotate(-1deg) scale(1); }
+    50% { transform: translate3d(1.5%, 2%, 0) rotate(1deg) scale(1.045); }
+    100% { transform: translate3d(3%, -1%, 0) rotate(0deg) scale(1.02); }
   }
 
-  /* 网格纹理 */
+  /* 漂移网格与稀疏光点 */
   body::after {
     content: "";
     position: fixed;
-    inset: 0;
+    inset: -84px;
     z-index: 0;
     pointer-events: none;
     background-image:
-      linear-gradient(hsl(45 100% 72% / 0.022) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(45 100% 72% / 0.022) 1px, transparent 1px);
-    background-size: 38px 38px;
-    mask-image: radial-gradient(circle at center, black 15%, transparent 78%);
-    opacity: 0.75;
+      linear-gradient(118deg, transparent 36%, hsl(45 100% 72% / 0.035) 50%, transparent 64%),
+      linear-gradient(hsl(45 100% 72% / 0.032) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(45 100% 72% / 0.032) 1px, transparent 1px),
+      radial-gradient(circle, hsl(45 100% 76% / 0.22) 0 1px, transparent 1.6px);
+    background-position: center, 0 0, 0 0, 18px 12px;
+    background-size: 100% 100%, 42px 42px, 42px 42px, 168px 168px;
+    mask-image: radial-gradient(ellipse at center, black 12%, hsl(0 0% 0% / 0.78) 48%, transparent 86%);
+    opacity: 0.82;
+    transform: translate3d(-21px, -16px, 0);
+    will-change: transform, opacity;
+    animation: ambient-grid-drift 28s ease-in-out infinite alternate;
+  }
+
+  @keyframes ambient-grid-drift {
+    0% {
+      transform: translate3d(-21px, -16px, 0);
+      opacity: 0.68;
+    }
+    100% {
+      transform: translate3d(21px, 16px, 0);
+      opacity: 0.9;
+    }
   }
 
   ::selection {
@@ -265,17 +286,39 @@
       top: 60px;
       align-self: flex-start;
       height: auto;
-      max-height: calc(100vh - 120px);
+      max-height: none;
       margin-bottom: 0;
       padding-top: 60px;
-      overflow-x: hidden;
-      overflow-y: auto;
-      scrollbar-width: thin;
-      scrollbar-color: var(--color-jet) transparent;
+      overflow: visible;
     }
     .sidebar-info-more {
       opacity: 1;
       visibility: visible;
+    }
+  }
+
+  /* 中等高度桌面端压缩侧栏密度，避免产生面板内部滚动。 */
+  @media (min-width: 1250px) and (max-height: 900px) {
+    .profile-sidebar,
+    .profile-sidebar.expanded {
+      top: 30px;
+      padding-top: 32px;
+      padding-bottom: 32px;
+    }
+    .profile-sidebar figure img {
+      width: 120px;
+      height: 120px;
+    }
+    .profile-sidebar .sidebar-info-more > div:first-child {
+      margin-top: 24px;
+      margin-bottom: 24px;
+    }
+    .profile-sidebar .sidebar-info-more ul {
+      row-gap: 16px;
+    }
+    .profile-sidebar .icon-box {
+      width: 42px;
+      height: 42px;
     }
   }
 
@@ -445,6 +488,32 @@
     color: var(--color-gold);
     font-weight: 400;
     animation: cursor-blink 0.8s steps(1, end) infinite;
+  }
+
+  /* 桌面导航和动态标题占据同一水平带，通过列间距而非行间距避让。 */
+  .about-heading {
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  @media (min-width: 580px) {
+    .about-heading {
+      margin-bottom: 20px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .about-heading {
+      display: flex;
+      align-items: center;
+      min-height: 64px;
+      margin-top: -32px;
+      margin-bottom: 20px;
+      padding-right: 455px;
+    }
+    .about-heading .article-title {
+      max-width: 100%;
+      margin: 0;
+      white-space: nowrap;
+    }
   }
 
   /* ===== 博客封面 ===== */
@@ -799,6 +868,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  body::before,
+  body::after {
+    animation: none !important;
+  }
+
   *,
   *::before,
   *::after {

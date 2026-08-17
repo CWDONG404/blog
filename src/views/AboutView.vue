@@ -73,9 +73,9 @@ onBeforeUnmount(() => window.clearTimeout(typingTimer))
 
 <template>
   <article class="surface-card panel-sizing animate-fade-in">
-    <header class="lg:pt-[42px]">
+    <header class="about-heading">
       <h2
-        class="article-title mt-4 mb-4 min-h-[1.45em] text-2xl text-paper sm:mb-5 sm:text-[32px]"
+        class="article-title min-h-[1.45em] text-2xl text-paper sm:text-[32px]"
         aria-label="CWD：重度 Vibe Coding 使用者、Windows 安全测试研究者、Python 全栈开发工程师"
       >
         <span>{{ streamedIdentity }}</span><span class="typing-cursor" aria-hidden="true">|</span>
